@@ -7,8 +7,37 @@ export default function WeaponDisplay(props) {
   const Weapons = useSelector(state => state.data.weapons)
   const weaponFind = Weapons.find(weapon => weapon.id === props.id)
 
+
+
+  const colorFinder = ()=>{
+    switch(weaponFind.damageType){
+      case "cold": 
+        return("rgb(12, 108, 153)")
+      case "fire":
+        return("rgb(145, 21, 21)")
+      case "lightning":
+        return("rgb(155, 179, 20)")
+      case "necrotic":
+        return("rgb(63, 32, 63)")
+      case "acid":
+        return("rgb(19, 155, 19)")
+      case "poison":
+        return("rgb(35, 66, 35)")
+      case "psychic":
+        return("rgb(161, 31, 70)")
+      case "force":
+        return("rgb(117, 41, 117)")
+      case "radiant":
+        return("rgb(196, 196, 133)")
+      default:
+        return ("rgb(121, 94, 94)")
+    }
+  }
+
+  const color = colorFinder()
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,{borderColor:color,borderWidth:3}]}>
       <Text style={styles.textTitle}>{weaponFind.name}</Text>
       <Text style={styles.text}>{weaponFind.damageType}</Text>
       <Text style={styles.text}>D{weaponFind.selectDice}</Text>
@@ -25,6 +54,7 @@ const styles = StyleSheet.create({
     justifyContent:"center",
     width:250,
     padding:8,
+
   },
   textTitle:{
     color:"white",
